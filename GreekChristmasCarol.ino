@@ -1,6 +1,8 @@
 /*Greek christmas carol
 http://www.arduino.cc/en/Tutorial/Tone
 */
+#include "NewTone.h"
+
 #include "pitches.h"
 int greekNYMelody[] = {
 NOTE_R,
@@ -257,32 +259,42 @@ float greekChristmasDurations2[] = {
 //----------
 2};
 
-
+// Jingle Bells
+int jingleBells[] = { NOTE_E5, NOTE_E5, NOTE_E5, NOTE_E5, NOTE_E5, NOTE_E5, NOTE_E5, NOTE_G5, NOTE_C5, NOTE_D5, NOTE_E5,
+                      NOTE_F5, NOTE_F5, NOTE_F5, NOTE_F5, NOTE_F5, NOTE_E5, NOTE_E5, NOTE_E5, NOTE_E5, NOTE_D5, NOTE_D5, NOTE_E5, NOTE_D5, NOTE_G5,
+                      NOTE_E5, NOTE_E5, NOTE_E5, NOTE_E5, NOTE_E5, NOTE_E5, NOTE_E5, NOTE_G5, NOTE_C5, NOTE_D5, NOTE_E5,
+                      NOTE_F5, NOTE_F5, NOTE_F5, NOTE_F5, NOTE_F5, NOTE_E5, NOTE_E5, NOTE_E5, NOTE_G5, NOTE_G5, NOTE_F5, NOTE_D5, NOTE_C5};
+float jingleBellsDurations[] = { 4, 4, 2, 4, 4, 2, 4, 4, 4, 4, 2,
+                               4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2,
+                               4, 4, 2, 4, 4, 2, 4, 4, 4, 4, 2,
+                               4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2 };
 
 
 
 int speakerPin = 9;
 
-void playmelody(int melody[],float duration[], int repetitions)
+void playmelody(int melody[],float duration[],int melodyLength, int repetitions)
 {
-	int melodyLength = sizeof(melody)/sizeof(int);
 	for (int i=0; i<repetitions; i++)	{
 		for (int thisNote = 0; thisNote < melodyLength; thisNote++) {
 		    int noteDuration = 1000 / duration[thisNote];
-		    tone(speakerPin, melody[thisNote], noteDuration);
+		    NewTone(speakerPin, melody[thisNote], noteDuration);
+		    
 		    int pauseBetweenNotes = noteDuration * 1.30;
 		    delay(pauseBetweenNotes);
-		    noTone(8);
+		    noNewTone(8);
 		}
     }
 
 }
 
 void setup() {
+Serial.begin(9600);
 }
 	
 void loop(){
-playmelody(greekChristmasMelody1,greekChristmasDurations1,4);
-playmelody(greekChristmasMelody2,greekChristmasDurations2,1);
-playmelody(greekNYMelody,greekNYDurations,4);
+  	playmelody(greekChristmasMelody1,greekChristmasDurations1,21,2);
+	playmelody(greekChristmasMelody2,greekChristmasDurations2,23,1);
+	playmelody(greekNYMelody,greekNYDurations,48,2);
+	playmelody(jingleBells, jingleBellsDurations,49,3);
 }
