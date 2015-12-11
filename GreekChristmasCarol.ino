@@ -4,6 +4,7 @@ http://www.arduino.cc/en/Tutorial/Tone
 #include "NewTone.h"
 
 #include "pitches.h"
+int melodyLength = 0;
 int greekNYMelody[] = {
 NOTE_R,
 NOTE_E5,
@@ -293,8 +294,12 @@ Serial.begin(9600);
 }
 	
 void loop(){
-  	playmelody(greekChristmasMelody1,greekChristmasDurations1,21,2);
-	playmelody(greekChristmasMelody2,greekChristmasDurations2,23,1);
-	playmelody(greekNYMelody,greekNYDurations,48,2);
-	playmelody(jingleBells, jingleBellsDurations,49,3);
+	melodyLength = sizeof(greekChristmasMelody1)/sizeof(int);
+  	playmelody(greekChristmasMelody1,greekChristmasDurations1,melodyLength,2);
+  	melodyLength = sizeof(greekChristmasMelody2)/sizeof(int);
+	playmelody(greekChristmasMelody2,greekChristmasDurations2,melodyLength,1);
+	melodyLength = sizeof(greekNYMelody)/sizeof(int);
+	playmelody(greekNYMelody,greekNYDurations,melodyLength,2);
+	melodyLength = sizeof(jingleBells)/sizeof(int);
+	playmelody(jingleBells, jingleBellsDurations,melodyLength,3);
 }
