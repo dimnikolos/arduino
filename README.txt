@@ -1,5 +1,5 @@
 Infrared_robot.ino
-Code for this: https://bitbucket.org/teckel12/arduino-new-tone/
+Code for this: https://www.youtube.com/watch?v=pa2j9Oy5rG8
 
 GreekChristmasCarol.ino
 Greek christmas carols for arduino
